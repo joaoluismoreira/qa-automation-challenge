@@ -1,9 +1,9 @@
 name: Playwright Tests
 on:
   push:
-    branches: Skycatch:master
+    branches: master
   pull_request:
-    branches: Skycatch:master
+    branches: master
 jobs:
   setup:
     runs-on: ubuntu-latest
