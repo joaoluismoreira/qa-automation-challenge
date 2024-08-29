@@ -28,36 +28,18 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
       - name: Start Server
-        run: npm run start:server
+        run: nohup npm run start:server &
 
   start-client:
     needs: start-server
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
       - name: Start Client
-        run: npm run start:client
+        run: nohup npm run start:client &
 
   test:
-    needs: start-client
+    needs: [start-server, start-client]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
