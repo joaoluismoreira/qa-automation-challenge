@@ -3,24 +3,29 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "express": "4.17.1",
-    "sql.js": "1.0.0"
+    "dotenv": "^16.4.5",
+    "express": "4.19.2",
+    "sql.js": "1.11.0"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server.js",
     "client": "node start-client.js",
     "setup": "npm i && cd client && npm i",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "npx playwright test",
+    "test:ui:mode": "npx playwright test --ui"
   },
   "devDependencies": {
-    "@babel/core": "7.5.4",
-    "babel-eslint": "10.0.1",
-    "concurrently": "4.1.1",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb": "17.1.1",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.14.3"
+    "@babel/core": "7.25.2",
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.1",
+    "babel-eslint": "10.1.0",
+    "concurrently": "8.2.2",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsx-a11y": "6.9.0",
+    "eslint-plugin-react": "7.35.0"
   }
 }
