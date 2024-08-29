@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Setup
-        run: start:server
+        run: npm run start:server
   start-client:
     needs: [setup, start-server]
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Setup
-        run: start:client
+        run: npm run start:client
   test:
     needs: [setup, start-server, start-client]
     timeout-minutes: 60
