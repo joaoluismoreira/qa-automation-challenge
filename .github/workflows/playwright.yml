@@ -13,6 +13,7 @@ jobs:
       - name: Setup
         run: npm run setup
   start:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +21,7 @@ jobs:
       - name: Setup
         run: npm run start
   test:
+    needs: [setup, start]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
