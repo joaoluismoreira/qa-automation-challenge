@@ -12,16 +12,24 @@ jobs:
       - uses: actions/setup-node@v4
       - name: Setup
         run: npm run setup
-  start:
+  start-server:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Setup
-        run: npm run start
+        run: start:server
+  start-client:
+    needs: [setup, start-server]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Setup
+        run: start:client
   test:
-    needs: [setup, start]
+    needs: [setup, start-server, start-client]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
