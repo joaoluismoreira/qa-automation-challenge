@@ -19,7 +19,8 @@ jobs:
       - name: Setup
         run: |
           npm run setup
-          npm run start &
+          npm run start:server &
+          npm run start:client &
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
