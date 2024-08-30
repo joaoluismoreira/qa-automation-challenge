@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import 'dotenv/config';
 
-const baseUrl = process.env.BASEURL;
+const baseUrl = process.env.BASE_URL;
 
 test.beforeEach(async ({ page }) => {
   await page.goto(`${baseUrl}`);
