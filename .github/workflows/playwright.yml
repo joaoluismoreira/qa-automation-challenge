@@ -21,6 +21,9 @@ jobs:
           npm run setup
           nohup npm run start:server &
           nohup npm run start:client &
+          until curl -s http://localhost:3000/ > /dev/null; do
+            sleep 1
+          done
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
