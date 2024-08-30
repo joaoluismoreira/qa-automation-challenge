@@ -12,34 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
       - name: Install dependencies
         run: npm ci
       - name: Setup
-        run: npm run setup
-
-  start-server:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Start Server
-        run: npm run start:server
-
-  start-client:
-    needs: start-server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Start Client
-        run: npm run start:client
+        run: |
+          npm run setup
+          npm run start:server
+          npm run start:client
 
   test:
-    needs: [start-server, start-client]
+    needs: [setup]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -47,13 +29,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
