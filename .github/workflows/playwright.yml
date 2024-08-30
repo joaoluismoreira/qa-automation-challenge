@@ -29,14 +29,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Start Server
-        run: nohup npm run start:server &
+        run: npm run start:server
 
   start-client:
     needs: start-server
     runs-on: ubuntu-latest
     steps:
       - name: Start Client
-        run: nohup npm run start:client &
+        run: npm run start:client
 
   test:
     needs: [start-server, start-client]
