@@ -16,7 +16,7 @@ jobs:
           node-version: 16
       - name: Install dependencies
         run: npm ci
-      - name: Setup
+      - name: Test
         run: |
           npm run setup
           nohup npm run start:server &

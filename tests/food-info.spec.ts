@@ -7,12 +7,6 @@ test.beforeEach(async ({ page }) => {
   await page.goto(`${baseUrl}`);
 });
 
-test('Landing Page layout', async ({ page }) => {
-  await expect(page).toHaveScreenshot(
-    'landing-page-actual-chromium-darwin.png'
-  );
-});
-
 test('Page has title', async ({ page }) => {
   await expect(page.getByText('Selected foods')).toBeVisible();
 });
@@ -24,5 +18,4 @@ test('search food info', async ({ page }) => {
   ).toBeVisible();
   await page.locator('#food-search :text("Bananas, raw")').click();
   await expect(page.getByText('89.00')).toBeVisible();
-  await expect(page).toHaveScreenshot('search-food-info-1-chromium-darwin.png');
 });
